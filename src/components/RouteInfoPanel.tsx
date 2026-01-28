@@ -9,13 +9,13 @@ interface Props {
 export function RouteInfoPanel({ route, routeName }: Props) {
   return (
     <div className="space-y-4">
-      <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden relative">
+      <div className="aspect-[3/4] bg-gray-700 rounded-lg overflow-hidden relative">
         {route.imageUrl ? (
           <Image
             src={route.imageUrl}
             alt={routeName}
             fill
-            className="object-cover"
+            className="object-contain p-1"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">

@@ -8,13 +8,13 @@ interface Props {
 export function CourseInfoPanel({ course }: Props) {
   return (
     <div className="space-y-4">
-      <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden relative">
+      <div className="aspect-[3/4] bg-gray-700 rounded-lg overflow-hidden relative">
         {course.imageUrl ? (
           <Image
             src={course.imageUrl}
             alt={course.name}
             fill
-            className="object-cover"
+            className="object-contain p-1"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">

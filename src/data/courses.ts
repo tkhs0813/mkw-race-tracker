@@ -1,7 +1,11 @@
 import type { Course } from "@/lib/schemas";
 
 export const courses = [
-  { id: "DK_Spaceport", name: "DKうちゅうセンター" },
+  {
+    id: "DK_Spaceport",
+    name: "DKうちゅうセンター",
+    memo: "ここはDKうちゅうセンターのメモです。\n改行もできます。",
+  },
   { id: "DK_Pass", name: "DKスノーマウンテン" },
   { id: "Sky-High_Sundae", name: "アイスビルディング" },
   { id: "Boo_Cinema", name: "おばけシネマ" },

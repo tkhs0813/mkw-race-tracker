@@ -13,6 +13,8 @@ export const routes = [
     id: "Whistlestop_Summit-to-DK_Spaceport",
     fromCourseId: "Whistlestop_Summit",
     toCourseId: "DK_Spaceport",
+    memo: "ここはRouteのメモです。\n改行もできます。",
+    imageUrl: "/images/routes/Whistlestop_Summit_-_DK_Spaceport.png",
   },
   {
     id: "Crown_City-to-DK_Spaceport",
