@@ -4,12 +4,15 @@ export const CourseSchema = z.object({
   id: z.string(),
   name: z.string(),
   imageUrl: z.string().optional(),
+  memo: z.string().optional(),
 });
 
 export const RouteSchema = z.object({
   id: z.string(),
   fromCourseId: z.string(),
   toCourseId: z.string(),
+  imageUrl: z.string().optional(),
+  memo: z.string().optional(),
 });
 
 export const ItemRequirementSchema = z.object({

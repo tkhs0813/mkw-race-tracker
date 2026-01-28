@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ShortcutCard } from "@/components";
+import {
+  CourseInfoPanel,
+  DetailPageLayout,
+  ShortcutList,
+} from "@/components";
 import {
   getCourse,
   getCourses,
@@ -27,6 +31,41 @@ export default async function CoursePage({ params }: Props) {
   const shortcuts = getShortcutsForCourse(course.id);
   const routes = getRoutesToCourse(course.id);
 
+  const leftColumn = (
+    <div className="space-y-8">
+      <CourseInfoPanel course={course} />
+
+      <section>
+        <h2 className="text-xl font-bold mb-4">このコースに行くRoute</h2>
+        {routes.length > 0 ? (
+          <div className="space-y-2">
+            {routes.map((route) => (
+              <Link
+                key={route.id}
+                href={`/routes/${route.id}`}
+                className="block p-3 bg-white rounded-lg shadow hover:shadow-md transition-shadow border border-gray-200 text-sm"
+              >
+                <span className="text-gray-600">
+                  {getCourse(route.fromCourseId)?.name ?? route.fromCourseId} →{" "}
+                  {getCourse(route.toCourseId)?.name ?? route.toCourseId}
+                </span>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-500 text-sm">Routeはありません</p>
+        )}
+      </section>
+    </div>
+  );
+
+  const rightColumn = (
+    <section>
+      <h2 className="text-2xl font-bold mb-4">ショートカット</h2>
+      <ShortcutList shortcuts={shortcuts} />
+    </section>
+  );
+
   return (
     <div>
       <Link
@@ -38,44 +77,7 @@ export default async function CoursePage({ params }: Props) {
 
       <h1 className="text-3xl font-bold mb-8">{course.name}</h1>
 
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-4">このコースに行くRoute</h2>
-        {routes.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {routes.map((route) => (
-              <Link
-                key={route.id}
-                href={`/routes/${route.id}`}
-                className="block p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow border border-gray-200"
-              >
-                <span className="text-gray-600">
-                  {getCourse(route.fromCourseId)?.name ?? route.fromCourseId} →{" "}
-                  {getCourse(route.toCourseId)?.name ?? route.toCourseId}
-                </span>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-500">Routeはありません</p>
-        )}
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold mb-4">ショートカット</h2>
-        {shortcuts.length > 0 ? (
-          <div className="space-y-6">
-            {shortcuts.map((shortcut, index) => (
-              <ShortcutCard
-                key={shortcut.id}
-                shortcut={shortcut}
-                index={index}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-500">ショートカットはまだありません</p>
-        )}
-      </section>
+      <DetailPageLayout leftColumn={leftColumn} rightColumn={rightColumn} />
     </div>
   );
 }

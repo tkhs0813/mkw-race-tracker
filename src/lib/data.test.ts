@@ -29,7 +29,7 @@ describe("getCourses", () => {
 
 describe("getCourse", () => {
   test("returns a course for valid id", () => {
-    const course = getCourse("mario-circuit");
+    const course = getCourse("Mario_Circuit");
     expect(course).toBeDefined();
     expect(course?.name).toBe("マリオサーキット");
   });
@@ -58,10 +58,10 @@ describe("getRoutes", () => {
 
 describe("getRoute", () => {
   test("returns a route for valid id", () => {
-    const route = getRoute("mario-to-toad");
+    const route = getRoute("Whistlestop_Summit-to-DK_Spaceport");
     expect(route).toBeDefined();
-    expect(route?.fromCourseId).toBe("mario-circuit");
-    expect(route?.toCourseId).toBe("toad-harbor");
+    expect(route?.fromCourseId).toBe("Whistlestop_Summit");
+    expect(route?.toCourseId).toBe("DK_Spaceport");
   });
 
   test("returns undefined for invalid id", () => {
@@ -72,10 +72,11 @@ describe("getRoute", () => {
 
 describe("getRoutesToCourse", () => {
   test("returns routes that end at the specified course", () => {
-    const routes = getRoutesToCourse("mario-circuit");
+    const routes = getRoutesToCourse("DK_Spaceport");
     expect(Array.isArray(routes)).toBe(true);
+    expect(routes.length).toBeGreaterThan(0);
     for (const route of routes) {
-      expect(route.toCourseId).toBe("mario-circuit");
+      expect(route.toCourseId).toBe("DK_Spaceport");
     }
   });
 
@@ -87,15 +88,15 @@ describe("getRoutesToCourse", () => {
 
 describe("getShortcutsForCourse", () => {
   test("returns shortcuts for the specified course", () => {
-    const shortcuts = getShortcutsForCourse("mario-circuit");
+    const shortcuts = getShortcutsForCourse("DK_Spaceport");
     expect(Array.isArray(shortcuts)).toBe(true);
     for (const shortcut of shortcuts) {
-      expect(shortcut.courseId).toBe("mario-circuit");
+      expect(shortcut.courseId).toBe("DK_Spaceport");
     }
   });
 
   test("each shortcut has required properties", () => {
-    const shortcuts = getShortcutsForCourse("mario-circuit");
+    const shortcuts = getShortcutsForCourse("DK_Spaceport");
     for (const shortcut of shortcuts) {
       expect(shortcut).toHaveProperty("id");
       expect(shortcut).toHaveProperty("youtubeUrl");
@@ -111,10 +112,10 @@ describe("getShortcutsForCourse", () => {
 
 describe("getShortcutsForRoute", () => {
   test("returns shortcuts for the specified route", () => {
-    const shortcuts = getShortcutsForRoute("mario-to-toad");
+    const shortcuts = getShortcutsForRoute("Whistlestop_Summit-to-DK_Spaceport");
     expect(Array.isArray(shortcuts)).toBe(true);
     for (const shortcut of shortcuts) {
-      expect(shortcut.routeId).toBe("mario-to-toad");
+      expect(shortcut.routeId).toBe("Whistlestop_Summit-to-DK_Spaceport");
     }
   });
 

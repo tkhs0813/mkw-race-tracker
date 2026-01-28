@@ -4,6 +4,8 @@ import type { CourseId } from "./courses";
 interface TypedRoute extends Omit<Route, "fromCourseId" | "toCourseId"> {
   fromCourseId: CourseId;
   toCourseId: CourseId;
+  imageUrl?: string;
+  memo?: string;
 }
 
 export const routes = [
