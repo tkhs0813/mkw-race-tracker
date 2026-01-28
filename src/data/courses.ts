@@ -1,0 +1,36 @@
+import type { Course } from "@/lib/schemas";
+
+export const courses = [
+  { id: "DK_Spaceport", name: "DKうちゅうセンター" },
+  { id: "DK_Pass", name: "DKスノーマウンテン" },
+  { id: "Sky-High_Sundae", name: "アイスビルディング" },
+  { id: "Boo_Cinema", name: "おばけシネマ" },
+  { id: "Toad's_Factory", name: "キノピオファクトリー" },
+  { id: "Airship_Fortress", name: "キラーシップ" },
+  { id: "Bowser's_Castle", name: "クッパキャッスル" },
+  { id: "Desert_Hills", name: "サンサンさばく" },
+  { id: "Whistlestop_Summit", name: "シュポポコースター" },
+  { id: "Dandelion_Depths", name: "ショーニューロード" },
+  { id: "Salty_Salty_Speedway", name: "ソルティータウン" },
+  { id: "Choco_Mountain", name: "チョコマウンテン" },
+  { id: "Dino_Dino_Jungle", name: "ディノディノジャングル" },
+  { id: "Crown_City", name: "トロフィーシティ" },
+  { id: "Acorn_Heights", name: "どんぐりツリーハウス" },
+  { id: "Koopa_Troopa_Beach", name: "ノコノコビーチ" },
+  { id: "Great_?_Block_Ruins", name: "ハテナしんでん" },
+  { id: "Peach_Stadium", name: "ピーチスタジアム" },
+  { id: "Peach_Beach", name: "ピーチビーチ" },
+  { id: "Cheep_Cheep_Falls", name: "プクプクフォールズ" },
+  { id: "Shy_Guy_Bazaar", name: "ヘイホーカーニバル" },
+  { id: "Dry_Bones_Burnout", name: "ホネホネツイスター" },
+  { id: "Mario_Circuit", name: "マリオサーキット" },
+  { id: "Mario_Bros._Circuit", name: "マリオブラザーズサーキット" },
+  { id: "Moo_Moo_Meadows", name: "モーモーカントリー" },
+  { id: "Faraway_Oasis", name: "リバーサイドサファリ" },
+  { id: "Rainbow_Road", name: "レインボーロード" },
+  { id: "Starview_Peak", name: "ロゼッタてんもんだい" },
+  { id: "Wario_Shipyard", name: "ワリオシップ" },
+  { id: "Wario_Stadium", name: "ワリオスタジアム" },
+] as const satisfies readonly Course[];
+
+export type CourseId = (typeof courses)[number]["id"];
