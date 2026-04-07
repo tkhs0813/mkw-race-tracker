@@ -1,16 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  DetailPageLayout,
-  RouteInfoPanel,
-  ShortcutList,
-} from "@/components";
-import {
-  getCourse,
-  getRoute,
-  getRoutes,
-  getShortcutsForRoute,
-} from "@/lib/data";
+import { getCourse, getRoute, getRoutes } from "@/lib/data";
+import { TrackDetail } from "@/components/TrackDetail";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -30,32 +21,18 @@ export default async function RoutePage({ params }: Props) {
 
   const fromCourse = getCourse(route.fromCourseId);
   const toCourse = getCourse(route.toCourseId);
-  const shortcuts = getShortcutsForRoute(route.id);
-
   const routeName = `${fromCourse?.name ?? route.fromCourseId} → ${toCourse?.name ?? route.toCourseId}`;
-
-  const leftColumn = <RouteInfoPanel route={route} routeName={routeName} />;
-
-  const rightColumn = (
-    <section>
-      <h2 className="text-2xl font-bold mb-4">ショートカット</h2>
-      <ShortcutList shortcuts={shortcuts} />
-    </section>
-  );
 
   return (
     <div>
       <Link
-        href={toCourse ? `/courses/${toCourse.id}` : "/"}
+        href="/"
         className="text-blue-600 hover:underline mb-4 inline-block"
       >
-        ← {toCourse?.name ?? "コース一覧"}に戻る
+        ← ダッシュボードに戻る
       </Link>
-
-      <h1 className="text-3xl font-bold mb-2">{routeName}</h1>
-      <p className="text-gray-600 mb-8">Route ショートカット</p>
-
-      <DetailPageLayout leftColumn={leftColumn} rightColumn={rightColumn} />
+      <h1 className="text-3xl font-bold mb-8">{routeName}</h1>
+      <TrackDetail trackType="route" trackId={route.id} trackName={routeName} />
     </div>
   );
 }

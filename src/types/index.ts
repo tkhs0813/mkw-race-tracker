@@ -1,7 +1,1 @@
-export type {
-  Course,
-  Route,
-  Shortcut,
-  ItemRequirement,
-  ItemType,
-} from "@/lib/schemas";
+export type { Course, Route } from "@/lib/schemas";

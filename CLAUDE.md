@@ -1,11 +1,13 @@
 ## Project Overview
 
-マリオカートワールドのショートカット動画集サイト。全コース(30)とRoute(202)のショートカットをYouTube動画で紹介する。
+マリオカートワールドのレース結果を記録・分析するアプリ。全コース(30)とRoute(202)でのレース結果を登録し、得意/苦手コースの分析ができる。
 
 ### Tech Stack
 
 - Next.js 14 (App Router) + TypeScript
 - Tailwind CSS
+- Turso (libSQL) + Drizzle ORM
+- Better Auth (email/password authentication)
 - Zod (validation)
 - Vitest (testing)
 - Vercel (hosting)
@@ -25,7 +27,7 @@
 - Immutability always - never mutate objects or arrays
 - No console.log in production code
 - Proper error handling with try/catch
-- Input validation with Zod or similar
+- Input validation with Zod
 
 ### 3. Testing
 
@@ -40,7 +42,6 @@
 - No hardcoded secrets
 - Environment variables for sensitive data
 - Validate all user inputs
-- Parameterized queries only
 - CSRF protection enabled
 
 ## File Structure
@@ -48,10 +49,34 @@
 ```
 src/
 |-- app/              # Next.js app router
+|   |-- api/auth/     # Better Auth API handler
+|   |-- api/races/    # Race CRUD API (GET/POST/DELETE)
+|   |-- courses/[id]/ # Course detail (stats + history)
+|   |-- login/        # Login / signup page
+|   |-- races/        # Race history & registration
+|   |-- routes/[id]/  # Route detail (stats + history)
 |-- components/       # Reusable UI components
-|-- hooks/            # Custom React hooks
-|-- lib/              # Utility libraries
+|-- data/             # Static course & route data
+|-- db/               # Drizzle schema & Turso connection
+|-- lib/              # Auth, analysis, schemas, utilities
 |-- types/            # TypeScript definitions
+```
+
+## Data Model
+
+```typescript
+// race_results table
+{
+  id: string;          // UUID
+  userId: string;      // FK to user table
+  trackType: "course" | "route";
+  trackId: string;     // courseId or routeId
+  placement: number;   // 1-12 (12p) or 1-24 (24p)
+  game: "12p" | "24p";
+  raceDate: string;    // "YYYY-MM-DD"
+  createdAt: string;   // ISO 8601
+  memo: string | null;
+}
 ```
 
 ## Key Patterns
@@ -82,11 +107,10 @@ try {
 
 ```bash
 # Required
-DATABASE_URL=
-API_KEY=
-
-# Optional
-DEBUG=false
+TURSO_DATABASE_URL=
+TURSO_AUTH_TOKEN=
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=
 ```
 
 ## Available Commands

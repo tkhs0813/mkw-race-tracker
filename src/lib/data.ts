@@ -1,5 +1,5 @@
-import type { Course, Route, Shortcut } from "@/types";
-import { courses, routes, shortcuts } from "@/data";
+import type { Course, Route } from "@/types";
+import { courses, routes } from "@/data";
 
 export function getCourses(): readonly Course[] {
   return courses;
@@ -19,12 +19,4 @@ export function getRoute(id: string): Route | undefined {
 
 export function getRoutesToCourse(courseId: string): Route[] {
   return routes.filter((r) => r.toCourseId === courseId);
-}
-
-export function getShortcutsForCourse(courseId: string): Shortcut[] {
-  return shortcuts.filter((s) => "courseId" in s && s.courseId === courseId);
-}
-
-export function getShortcutsForRoute(routeId: string): Shortcut[] {
-  return shortcuts.filter((s) => "routeId" in s && s.routeId === routeId);
 }

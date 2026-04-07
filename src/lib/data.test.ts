@@ -5,8 +5,6 @@ import {
   getRoutes,
   getRoute,
   getRoutesToCourse,
-  getShortcutsForCourse,
-  getShortcutsForRoute,
 } from "./data";
 
 describe("getCourses", () => {
@@ -83,44 +81,5 @@ describe("getRoutesToCourse", () => {
   test("returns empty array for course with no incoming routes", () => {
     const routes = getRoutesToCourse("non-existent-course");
     expect(routes).toEqual([]);
-  });
-});
-
-describe("getShortcutsForCourse", () => {
-  test("returns shortcuts for the specified course", () => {
-    const shortcuts = getShortcutsForCourse("DK_Spaceport");
-    expect(Array.isArray(shortcuts)).toBe(true);
-    for (const shortcut of shortcuts) {
-      expect(shortcut.courseId).toBe("DK_Spaceport");
-    }
-  });
-
-  test("each shortcut has required properties", () => {
-    const shortcuts = getShortcutsForCourse("DK_Spaceport");
-    for (const shortcut of shortcuts) {
-      expect(shortcut).toHaveProperty("id");
-      expect(shortcut).toHaveProperty("youtubeUrl");
-      expect(shortcut).toHaveProperty("requiredItems");
-    }
-  });
-
-  test("returns empty array for course with no shortcuts", () => {
-    const shortcuts = getShortcutsForCourse("non-existent-course");
-    expect(shortcuts).toEqual([]);
-  });
-});
-
-describe("getShortcutsForRoute", () => {
-  test("returns shortcuts for the specified route", () => {
-    const shortcuts = getShortcutsForRoute("Whistlestop_Summit-to-DK_Spaceport");
-    expect(Array.isArray(shortcuts)).toBe(true);
-    for (const shortcut of shortcuts) {
-      expect(shortcut.routeId).toBe("Whistlestop_Summit-to-DK_Spaceport");
-    }
-  });
-
-  test("returns empty array for route with no shortcuts", () => {
-    const shortcuts = getShortcutsForRoute("non-existent-route");
-    expect(shortcuts).toEqual([]);
   });
 });

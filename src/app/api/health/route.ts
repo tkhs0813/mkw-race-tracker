@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { courses, routes, shortcuts } from "@/data";
+import { courses, routes } from "@/data";
 
 export async function GET() {
   return NextResponse.json({
@@ -8,7 +8,6 @@ export async function GET() {
     data: {
       courses: courses.length,
       routes: routes.length,
-      shortcuts: shortcuts.length,
     },
   });
 }
