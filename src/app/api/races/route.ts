@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
 
     if (!parsed.success) {
       return NextResponse.json(
-        { success: false, error: "Invalid input", details: parsed.error.issues },
+        { success: false, error: "Invalid input" },
         { status: 400 }
       );
     }
