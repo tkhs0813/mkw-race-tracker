@@ -29,9 +29,6 @@ export default function Home() {
   const overallAvg = totalRaces > 0
     ? Math.round((results.reduce((sum, r) => sum + r.placement, 0) / totalRaces) * 10) / 10
     : 0;
-  const winCount = results.filter((r) => r.placement === 1).length;
-  const winRate = totalRaces > 0 ? Math.round((winCount / totalRaces) * 100) : 0;
-
   const strongest = getStrongestTracks(allStats, 3);
   const weakest = getWeakestTracks(allStats, 3);
 
@@ -43,7 +40,7 @@ export default function Home() {
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">ダッシュボード</h1>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <div className="bg-white rounded-lg p-4 shadow border border-gray-200 text-center">
           <p className="text-sm text-gray-500">総レース数</p>
           <p className="text-3xl font-bold">{totalRaces}</p>
@@ -51,10 +48,6 @@ export default function Home() {
         <div className="bg-white rounded-lg p-4 shadow border border-gray-200 text-center">
           <p className="text-sm text-gray-500">平均順位</p>
           <p className="text-3xl font-bold">{overallAvg > 0 ? `${overallAvg}位` : "-"}</p>
-        </div>
-        <div className="bg-white rounded-lg p-4 shadow border border-gray-200 text-center">
-          <p className="text-sm text-gray-500">勝率</p>
-          <p className="text-3xl font-bold">{totalRaces > 0 ? `${winRate}%` : "-"}</p>
         </div>
       </div>
 

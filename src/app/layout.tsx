@@ -1,12 +1,26 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { UserMenu } from "@/components/UserMenu";
 import { AuthGuard } from "@/components/AuthGuard";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MKW Race Tracker - マリオカートワールド レース記録",
   description: "マリオカートワールドのレース結果を記録・分析",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "MKW Tracker",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#1d4ed8",
 };
 
 export default function RootLayout({
@@ -17,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className="min-h-screen bg-gray-50">
+        <ServiceWorkerRegister />
         <header className="bg-blue-700 text-white shadow-lg">
           <div className="max-w-6xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
